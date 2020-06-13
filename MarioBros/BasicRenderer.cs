@@ -22,11 +22,12 @@ namespace MarioBros
         }
 
         public void Render(GameRound gameRound, SpriteBatch SpriteBatch)
-        {
+        {            
             spriteBatch = SpriteBatch;
 
             foreach (GameObject gameObject in gameRound.Objects)
             {
+                
                 if (gameObject is Block b) DrawBlock(b);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
             }
@@ -50,8 +51,8 @@ namespace MarioBros
         }
 
         private Rectangle ToPixels(Box box)
-        {
-            return new Rectangle((int)(box.Left * PixelsPerUnit), (int)(box.Bottom * PixelsPerUnit), (int)(box.Width * PixelsPerUnit), (int)(box.Height * PixelsPerUnit));
+        {            
+            return new Rectangle((int)(box.Left * PixelsPerUnit), (((int)(box.Bottom * PixelsPerUnit))*-1)+400, (int)(box.Width * PixelsPerUnit), (int)(box.Height * PixelsPerUnit));
         }
     }
 }
