@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace MarioBros
 {
-    public class MonsterVsBlockBumpHandler : CollisionHandler<Shellcreeper, BlockBump>
+    public class MonsterVsBlockBumpHandler : CollisionHandler<Monster, BlockBump>
     {
-        private List<Shellcreeper> handled = new List<Shellcreeper>(); // This isn't going to work forever, but it will work for now.
-        public override void Handle(Shellcreeper a, BlockBump b, CollisionDirections directions)
+        private List<Monster> handled = new List<Monster>(); // This isn't going to work forever, but it will work for now.
+        public override void Handle(Monster a, BlockBump b, CollisionDirections directions)
         {
             if (handled.Contains(a)) return;
 

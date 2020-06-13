@@ -50,6 +50,7 @@
     <Compile Include="Collision.cs" />
     <Compile Include="CollisionHandler.cs" />
     <Compile Include="Dimensions.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="DirectionExtensions.cs" />
     <Compile Include="ExitPipe.cs" />
     <Compile Include="GameObject.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="KeyboardControls.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="MarioBrosGame.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="MonsterVsBlockBumpHandler.cs" />
     <Compile Include="MonsterVsExitPipeHandler.cs" />
     <Compile Include="MonsterVsMonsterHandler.cs" />

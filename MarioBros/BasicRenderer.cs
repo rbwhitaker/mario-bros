@@ -43,6 +43,7 @@ namespace MarioBros
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
+                else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
             }
         }
@@ -54,8 +55,16 @@ namespace MarioBros
             bounds.Y -= 16;
             
             if (c.Direction) { spriteBatch.Draw(Mario_Right, bounds, Color.White); }
-            if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }            
+            if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }
             //spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
+        }
+
+        private void DrawGenericMonster(Monster monster)
+        {
+            Box visualBox = monster.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            bounds.Y -= 16;
+            spriteBatch.Draw(simpleRectangle, bounds, null, Color.Red, 0, new Vector2(0.5f, 0.5f), monster.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
         }
 
         private void DrawShellCreeper(Shellcreeper shellcreeper)
