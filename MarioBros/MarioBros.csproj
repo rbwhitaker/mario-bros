@@ -61,6 +61,7 @@
     <Compile Include="LevelLoader.cs" />
     <Compile Include="MarioBrosGame.cs" />
     <Compile Include="MonsterVsBlockBumpHandler.cs" />
+    <Compile Include="MonsterVsExitPipeHandler.cs" />
     <Compile Include="MonsterVsMonsterHandler.cs" />
     <Compile Include="PlayerCharacter.cs" />
     <Compile Include="PlayerCharacterVsBlockCollisionHandler.cs" />

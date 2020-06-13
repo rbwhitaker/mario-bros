@@ -73,7 +73,7 @@ namespace MarioBros
 
         private void DrawExitPipe(ExitPipe pipe)
         {
-            Box visualBox = pipe.VisualBox;
+            Box visualBox = pipe.PhysicsBox;
             Rectangle bounds = ToPixels(visualBox);
             spriteBatch.Draw(simpleRectangle, bounds, Color.LightGreen);
         }
