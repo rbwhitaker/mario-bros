@@ -68,6 +68,8 @@
     <Compile Include="PlayerCharacter.cs" />
     <Compile Include="PlayerCharacterVsBlockCollisionHandler.cs" />
     <Compile Include="PlayerCharacterVsMonsterHandler.cs" />
+    <Compile Include="PlayerCharacterVsPOWBlockHandler.cs" />
+    <Compile Include="POWBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shellcreeper.cs" />

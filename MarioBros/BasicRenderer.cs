@@ -15,8 +15,9 @@ namespace MarioBros
         SpriteBatch spriteBatch;
         SpriteFont font;
         private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
-        private Texture2D StraightPipe, CurvedPipe;
 
+        private Texture2D StraightPipe, CurvedPipe;
+        private Texture2D POW1, POW2, POW3;
         public BasicRenderer(ContentManager Content)
         {
             content = Content;
@@ -28,6 +29,10 @@ namespace MarioBros
             TurtleBack = Content.Load<Texture2D>("turtleback");
             StraightPipe = Content.Load<Texture2D>("StraightPipe");
             CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
+
+            POW1 = Content.Load<Texture2D>("POW1");
+            POW2 = Content.Load<Texture2D>("POW2");
+            POW3 = Content.Load<Texture2D>("POW3");
 
             font = Content.Load<SpriteFont>("Font");
         }
@@ -45,6 +50,7 @@ namespace MarioBros
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
                 else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
+                if (gameObject is POWBlock pw) DrawPOW(pw);
             }
         }
 
@@ -96,6 +102,26 @@ namespace MarioBros
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             spriteBatch.Draw(simpleRectangle, bounds, Color.Red);
+        }
+        
+        private void DrawPOW(POWBlock p)
+        {
+            Box visualBox = p.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            switch(p.TimesHit)
+            {
+                case 1:
+                    spriteBatch.Draw(POW1, bounds, Color.White);
+                    break;
+                case 2:
+                    spriteBatch.Draw(POW2, bounds, Color.White);
+                    break;
+                case 3:
+                    spriteBatch.Draw(POW3, bounds, Color.White);
+                    break;
+                case 4:
+                    break;
+            }
         }
 
         private Rectangle ToPixels(Box box)

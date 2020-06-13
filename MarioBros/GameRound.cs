@@ -41,6 +41,7 @@ namespace MarioBros
                 new HeadHitBlockHandler(this),
                 new SimpleObjectVsBlockCollisionHandler(),
                 new PlayerCharacterVsMonsterHandler(),
+                new PlayerCharacterVsPOWBlockHandler(objects.OfType<Monster>().ToList()),
                 new MonsterVsMonsterHandler(),
                 new MonsterVsBlockBumpHandler(),
                 new MonsterVsExitPipeHandler()
