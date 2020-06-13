@@ -79,7 +79,7 @@ namespace MarioBros
         {
             Box visualBox = pipe.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.LightGreen);
+            if (bounds.X == 0) { spriteBatch.Draw(StraightPipe, bounds, null, Color.LightGreen, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0.0f); } else { spriteBatch.Draw(StraightPipe, bounds, Color.LightGreen); }
         }
 
         private void DrawBlockBump(BlockBump b)
