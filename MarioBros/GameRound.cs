@@ -39,8 +39,18 @@ namespace MarioBros
             foreach (Collision collision in collisions)
                 HandleCollision(handlers, collision);
 
-            foreach (GameObject thisObject in objects) { if (thisObject is Monster && !thisObject.IsAlive) score += 800; }
 
+            List<GameObject> toAdd = new List<GameObject>();
+            foreach (GameObject thisObject in objects)
+            {
+                if (thisObject is Monster && !thisObject.IsAlive)
+                {
+                    score += 800;
+                    toAdd.Add(new Coin(2, 23));
+                }
+            }
+
+            objects.AddRange(toAdd);
             objects.RemoveAll(o => !o.IsAlive);
         }
 
