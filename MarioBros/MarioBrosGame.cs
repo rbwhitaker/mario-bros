@@ -10,8 +10,10 @@ namespace MarioBros
         private readonly GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private GameRound gameRound;
-        private Texture2D simpleRectangle;
-        
+        private BasicRenderer renderer;
+
+        private const float PixelsPerUnit = 16;
+
         public MarioBrosGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -24,6 +26,7 @@ namespace MarioBros
         {
             base.Initialize();
             gameRound = GenerateGameRound();
+            renderer = new BasicRenderer(Content);
         }
 
         private GameRound GenerateGameRound()
@@ -48,8 +51,6 @@ namespace MarioBros
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            simpleRectangle = Content.Load<Texture2D>("Rectangle16");
         }
 
         protected override void UnloadContent()
@@ -71,36 +72,12 @@ namespace MarioBros
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach(GameObject gameObject in gameRound.Objects)
-            {
-                if (gameObject is Block b) DrawBlock(b);
-                if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
-            }
+                renderer.Render(gameRound, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        private void DrawPlayerCharacter(PlayerCharacter c)
-        {
-            Box visualBox = c.VisualBox;
-            Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.White);
-        }
-
-
-        private const float PixelsPerUnit = 16;
-
-        private void DrawBlock(Block b)
-        {
-            Box visualBox = b.VisualBox;
-            Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.Blue);
-        }
-
-        private Rectangle ToPixels(Box box)
-        {
-            return new Rectangle((int)(box.Left * PixelsPerUnit), (int)(box.Bottom * PixelsPerUnit), (int)(box.Width * PixelsPerUnit), (int)(box.Height * PixelsPerUnit));
-        }
+       
     }
 }

@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AxisAlignedBoundingBox.cs" />
+    <Compile Include="BasicRenderer.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="Dimensions.cs" />
