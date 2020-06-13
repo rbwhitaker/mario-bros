@@ -23,6 +23,8 @@ namespace MarioBros
             List<Collision> collisions = DetermineCollisions();
             foreach (Collision collision in collisions)
                 HandleCollision(collision);
+
+            objects.RemoveAll(o => !o.IsAlive);
         }
 
         public Vector2 WorldSize => new Vector2(32, 25);
@@ -36,13 +38,14 @@ namespace MarioBros
         {
             List<ICollisionHandler> handlers = new List<ICollisionHandler>
             {
+                new HeadHitBlockHandler(this),
                 new SimpleObjectVsBlockCollisionHandler(),
                 new PlayerCharacterVsMonsterHandler(),
                 new MonsterVsMonsterHandler()
             };
 
             foreach(ICollisionHandler handler in handlers.Where(h => h.ShouldHandle(collision)))
-                handler.Handle(collision.A, collision.B);
+                handler.Handle(collision.A, collision.B, collision.Directions);
         }
 
         private List<Collision> DetermineCollisions()
@@ -55,7 +58,14 @@ namespace MarioBros
                     if (a == b) continue;
 
                     if (a.PhysicsBox.Intersects(b.PhysicsBox))
-                        collisions.Add(new Collision(a, b));
+                    {
+                        bool top = a.PhysicsBox.Bottom <= b.PhysicsBox.Top && a.PreviousPhysicsBox.Bottom > b.PhysicsBox.Top;
+                        bool bottom = a.PhysicsBox.Top >= b.PhysicsBox.Bottom && a.PreviousPhysicsBox.Top < b.PhysicsBox.Bottom;
+                        bool left = a.PhysicsBox.Left <= b.PhysicsBox.Right && a.PreviousPhysicsBox.Left > b.PhysicsBox.Right;
+                        bool right = a.PhysicsBox.Right >= b.PhysicsBox.Left && a.PreviousPhysicsBox.Right < b.PhysicsBox.Left;
+
+                        collisions.Add(new Collision(a, b, new CollisionDirections(left, right, top, bottom)));
+                    }
                 }
             }
             return collisions;

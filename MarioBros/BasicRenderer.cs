@@ -29,6 +29,7 @@ namespace MarioBros
             {
                 
                 if (gameObject is Block b) DrawBlock(b);
+                if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
             }
@@ -57,6 +58,13 @@ namespace MarioBros
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             spriteBatch.Draw(simpleRectangle, bounds, Color.Blue);
+        }
+
+        private void DrawBlockBump(BlockBump b)
+        {
+            Box visualBox = b.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            spriteBatch.Draw(simpleRectangle, bounds, Color.Red);
         }
 
         private Rectangle ToPixels(Box box)
