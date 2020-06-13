@@ -30,14 +30,22 @@ namespace MarioBros
                 
                 if (gameObject is Block b) DrawBlock(b);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
+                if (gameObject is Shellcreeper s) DrawShellCreeper(s);
             }
         }
 
-    private void DrawPlayerCharacter(PlayerCharacter c)
+        private void DrawPlayerCharacter(PlayerCharacter c)
         {
             Box visualBox = c.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             spriteBatch.Draw(simpleRectangle, bounds, Color.White);
+        }
+
+        private void DrawShellCreeper(Shellcreeper shellcreeper)
+        {
+            Box visualBox = shellcreeper.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            spriteBatch.Draw(simpleRectangle, bounds, Color.Green);
         }
 
 

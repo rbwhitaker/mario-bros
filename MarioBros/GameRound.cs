@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace MarioBros
@@ -33,25 +31,18 @@ namespace MarioBros
 
         private void HandleCollision(Collision collision)
         {
-            if(collision.A is PlayerCharacter p && collision.B is Block b)
+            List<ICollisionHandler> handlers = new List<ICollisionHandler>
             {
-                if (p.PhysicsBox.Bottom <= b.PhysicsBox.Top && p.PreviousPhysicsBox.Bottom > b.PhysicsBox.Top)
-                {
-                    p.Position = new Vector2(p.Position.X, b.PhysicsBox.Top + 0.01f);
-                    p.Velocity = new Vector2(p.Velocity.X, 0);
-                }
-                if(p.PhysicsBox.Top >= b.PhysicsBox.Bottom && p.PreviousPhysicsBox.Top < b.PhysicsBox.Bottom)
-                {
-                    p.Position = new Vector2(p.Position.X, b.PhysicsBox.Bottom - p.PhysicsDimensions.Height - 0.01f);
-                    p.Velocity = new Vector2(p.Velocity.X, 0);
-                }
-            }
+                new SimpleObjectVsBlockCollisionHandler()
+            };
+
+            handlers.FirstOrDefault(h => h.ShouldHandle(collision))?.Handle(collision.A, collision.B);
         }
 
         private List<Collision> DetermineCollisions()
         {
             List<Collision> collisions = new List<Collision>();
-            foreach (GameObject a in objects.OfType<PlayerCharacter>())
+            foreach (GameObject a in objects.OfType<SimpleObject>())
             {
                 foreach (GameObject b in objects)
                 {

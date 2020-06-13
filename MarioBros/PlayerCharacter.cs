@@ -3,32 +3,43 @@ using System.Linq;
 
 namespace MarioBros
 {
-    public class PlayerCharacter : GameObject
+    public abstract class SimpleObject : GameObject
+    {
+        public Vector2 Velocity { get; set; }
+
+        public SimpleObject(Dimensions visualDimensions, Dimensions physicsDimensions) : base(visualDimensions, physicsDimensions) { }
+
+        public override void UpdateCore(GameRound round, float elapsedSeconds)
+        {
+            // Gravity
+            Velocity -= new Vector2(0, 62f) * elapsedSeconds;
+            Position += Velocity * elapsedSeconds;
+        }
+    }
+
+    public class PlayerCharacter : SimpleObject
     {
         private static readonly Dimensions CharacterPhysicsDimensions = new Dimensions(1, 1, 2, 0);
         private static readonly Dimensions CharacterVisualDimensions = new Dimensions(1, 1, 2, 0);
         private static readonly Dimensions JumpArea = new Dimensions(1, 1, -0.01f, 0.25f);
 
-        public Vector2 Velocity { get; set; }
 
         private readonly IPlayerControls controls;
 
-        public PlayerCharacter(IPlayerControls controls) : base(CharacterPhysicsDimensions, CharacterVisualDimensions)
+        public PlayerCharacter(IPlayerControls controls) : base(CharacterVisualDimensions, CharacterPhysicsDimensions)
         {
             this.controls = controls;
         }
 
         public override void UpdateCore(GameRound round, float elapsedSeconds)
         {
-            // Gravity
-            Velocity -= new Vector2(0, 16f) * elapsedSeconds;
-            Position += Velocity * elapsedSeconds;
+            base.UpdateCore(round, elapsedSeconds);
 
             controls.Update(elapsedSeconds);
-            Position += new Vector2(controls.HorizontalSpeed * 12f, 0) * elapsedSeconds;
+            Position += new Vector2(controls.HorizontalSpeed * 20f, 0) * elapsedSeconds;
             if (controls.IsAttemptingToJump)
                 if(round.ObjectsIn(new Box(Position, JumpArea)).Any())
-                    Velocity = new Vector2(Velocity.X, 16);
+                    Velocity = new Vector2(Velocity.X, 30);
         }
     }
 }
