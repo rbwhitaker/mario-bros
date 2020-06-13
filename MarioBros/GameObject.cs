@@ -17,12 +17,12 @@ namespace MarioBros
             VisualDimensions = visualDimensions;
         }
         
-        public void Update(float elapsedSeconds)
+        public void Update(GameRound gameRound, float elapsedSeconds)
         {
             PreviousPhysicsBox = PhysicsBox;
-            UpdateCore(elapsedSeconds);
+            UpdateCore(gameRound, elapsedSeconds);
         }
 
-        public abstract void UpdateCore(float elapsedSeconds);
+        public abstract void UpdateCore(GameRound gameRound, float elapsedSeconds);
     }
 }

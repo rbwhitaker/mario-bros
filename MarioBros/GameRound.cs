@@ -19,11 +19,16 @@ namespace MarioBros
         public void Update(float elapsedSeconds)
         {
             foreach (GameObject gameObject in objects)
-                gameObject.Update(elapsedSeconds);
+                gameObject.Update(this, elapsedSeconds);
 
             List<Collision> collisions = DetermineCollisions();
             foreach (Collision collision in collisions)
                 HandleCollision(collision);
+        }
+
+        public IEnumerable<GameObject> ObjectsIn(Box box)
+        {
+            return objects.Where(o => o.PhysicsBox.Intersects(box));
         }
 
         private void HandleCollision(Collision collision)
