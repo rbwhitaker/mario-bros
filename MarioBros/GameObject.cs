@@ -16,6 +16,6 @@ namespace MarioBros
             VisualDimensions = visualDimensions;
         }
         
-        public abstract void Update(double elapsedSeconds);
+        public abstract void Update(float elapsedSeconds);
     }
 }

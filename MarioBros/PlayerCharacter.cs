@@ -7,7 +7,7 @@
 
         public PlayerCharacter() : base(CharacterPhysicsDimensions, CharacterVisualDimensions) { }
 
-        public override void Update(double elapsedSeconds)
+        public override void Update(float elapsedSeconds)
         {
 
         }

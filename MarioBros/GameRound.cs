@@ -13,7 +13,7 @@ namespace MarioBros
             objects.Add(newObject);
         }
 
-        public void Update(double elapsedSeconds)
+        public void Update(float elapsedSeconds)
         {
             foreach (GameObject gameObject in objects)
                 gameObject.Update(elapsedSeconds);
