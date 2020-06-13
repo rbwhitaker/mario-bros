@@ -11,6 +11,12 @@ namespace MarioBros
         private const float ShellcreeperSpeed = 8;
 
         private static readonly Dimensions ShellcreeperPhysicsDimensions = new Dimensions(0.8f, 0.8f, 1.8f, 0);
+
+        internal void Kill()
+        {
+            IsAlive = false;
+        }
+
         private static readonly Dimensions ShellcreeperVisualDimensions = new Dimensions(1, 1, 2, 0);
         private static readonly Dimensions GroundArea = new Dimensions(1, 1, -0.01f, 0.25f);
         public Direction Direction { get; set; }

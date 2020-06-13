@@ -4,7 +4,10 @@
     {
         public override void Handle(PlayerCharacter character, Shellcreeper monster, CollisionDirections directions)
         {
-            character.Kill();
+            if (monster.IsStunned)
+                monster.Kill();
+            else
+                character.Kill();
         }
     }
 }
