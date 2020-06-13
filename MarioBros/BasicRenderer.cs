@@ -52,6 +52,7 @@ namespace MarioBros
                 //else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
                 if (gameObject is Sidestepper stepper) DrawSideStepper(stepper);
+                spriteBatch.DrawString(font, "Score: " + gameRound.score, new Vector2(0, 0), Color.White);
             }
         }
 
@@ -61,19 +62,18 @@ namespace MarioBros
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
             spriteBatch.Draw(Stepper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), stepper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
-
         }
 
         private void DrawPlayerCharacter(PlayerCharacter c)
         {
+            spriteBatch.DrawString(font, "Lives: " + c.Lives, new Vector2(300, 0), Color.White);
             Box visualBox = c.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
             
             if (c.Direction) { spriteBatch.Draw(Mario_Right, bounds, Color.White); }
             if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }
-            //spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
-        }
+       }
 
         private void DrawCoin(Coin coin)
         {

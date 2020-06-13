@@ -9,6 +9,7 @@ namespace MarioBros
         private readonly List<GameObject> objects = new List<GameObject>();
 
         public IEnumerable<GameObject> Objects => objects;
+        public int score = 0;
 
         public void Add(GameObject newObject)
         {
@@ -37,6 +38,8 @@ namespace MarioBros
             List<Collision> collisions = DetermineCollisions();
             foreach (Collision collision in collisions)
                 HandleCollision(handlers, collision);
+
+            foreach (GameObject thisObject in objects) { if (thisObject is Monster && !thisObject.IsAlive) score += 800; }
 
             objects.RemoveAll(o => !o.IsAlive);
         }
