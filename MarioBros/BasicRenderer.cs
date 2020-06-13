@@ -15,7 +15,7 @@ namespace MarioBros
         SpriteBatch spriteBatch;
         SpriteFont font;
         private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
-        private Texture2D StraightPipe, CurvedPipe;
+        private Texture2D StraightPipe, CurvedPipe, Stepper;
 
         public BasicRenderer(ContentManager Content)
         {
@@ -28,7 +28,7 @@ namespace MarioBros
             TurtleBack = Content.Load<Texture2D>("turtleback");
             StraightPipe = Content.Load<Texture2D>("StraightPipe");
             CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
-
+            Stepper = Content.Load<Texture2D>("sidestepper");
             font = Content.Load<SpriteFont>("Font");
         }
 
@@ -45,7 +45,17 @@ namespace MarioBros
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
                 else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
+                if (gameObject is Sidestepper stepper) DrawSideStepper(stepper);
             }
+        }
+
+        private void DrawSideStepper(Sidestepper stepper)
+        {
+            Box visualBox = stepper.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            bounds.Y -= 16;
+
+            spriteBatch.Draw(Stepper, bounds, Color.White);
         }
 
         private void DrawPlayerCharacter(PlayerCharacter c)
