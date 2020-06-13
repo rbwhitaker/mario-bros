@@ -1,4 +1,6 @@
-﻿namespace MarioBros
+﻿using Microsoft.Xna.Framework;
+
+namespace MarioBros
 {
     public struct Dimensions
     {
@@ -36,6 +38,11 @@
         public static Dimensions operator *(Dimensions dimensions, float scalar)
         {
             return new Dimensions(dimensions.Left * scalar, dimensions.Right * scalar, dimensions.Top * scalar, dimensions.Bottom * scalar);
+        }
+
+        public static Dimensions operator *(Dimensions dimensions, Vector2 amount)
+        {
+            return new Dimensions(dimensions.Left * amount.X, dimensions.Right * amount.X, dimensions.Top * amount.Y, dimensions.Bottom * amount.Y);
         }
 
         public Dimensions(float allDirections) : this(allDirections, allDirections, allDirections, allDirections) { }

@@ -14,7 +14,7 @@ namespace MarioBros
         ContentManager content;
         SpriteBatch spriteBatch;
         SpriteFont font;
-        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, Brick, TurtleBack;
+        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, Brick, TurtleBack, Coin;
         private Texture2D StraightPipe, CurvedPipe, Stepper;
 
         private const float PixelsPerUnit = 16;
@@ -32,6 +32,7 @@ namespace MarioBros
             StraightPipe = Content.Load<Texture2D>("StraightPipe");
             CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
             Stepper = Content.Load<Texture2D>("sidestepper");
+            Coin = Content.Load<Texture2D>("Coin");
             font = Content.Load<SpriteFont>("Font");
         }
 
@@ -47,6 +48,7 @@ namespace MarioBros
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
+                if (gameObject is Coin coin) DrawCoin(coin);
                 //else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
                 if (gameObject is Sidestepper stepper) DrawSideStepper(stepper);
@@ -71,6 +73,14 @@ namespace MarioBros
             if (c.Direction) { spriteBatch.Draw(Mario_Right, bounds, Color.White); }
             if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }
             //spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
+        }
+
+        private void DrawCoin(Coin coin)
+        {
+            Box visualBox = coin.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            bounds.Y -= 16;
+            spriteBatch.Draw(Coin, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), SpriteEffects.None, 0f);
         }
 
         private void DrawGenericMonster(Monster monster)

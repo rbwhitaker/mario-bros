@@ -48,6 +48,8 @@
     <Compile Include="BlockBump.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="Brick.cs" />
+    <Compile Include="Coin.cs" />
+    <Compile Include="CoinVsBlockBumpHandler.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="CollisionHandler.cs" />
     <Compile Include="Dimensions.cs" />

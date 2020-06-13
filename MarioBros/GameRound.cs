@@ -27,7 +27,11 @@ namespace MarioBros
                 new PlayerCharacterVsMonsterHandler(),
                 new MonsterVsMonsterHandler(),
                 new MonsterVsBlockBumpHandler(),
-                new MonsterVsExitPipeHandler()
+                new MonsterVsExitPipeHandler(),
+                new PlayerCharacterVsCoinHandler(),
+                new CoinVsBlockBumpHandler(),
+                new CoinVsExitPipeHandler()
+
             };
 
             List<Collision> collisions = DetermineCollisions();
