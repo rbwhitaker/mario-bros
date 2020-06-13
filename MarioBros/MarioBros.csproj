@@ -48,6 +48,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRound.cs" />
     <Compile Include="MarioBrosGame.cs" />
+    <Compile Include="PlayerCharacter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
