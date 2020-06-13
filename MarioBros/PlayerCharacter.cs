@@ -23,7 +23,7 @@ namespace MarioBros
             Position += Velocity * elapsedSeconds;
 
             controls.Update(elapsedSeconds);
-            Position += new Vector2(controls.HorizontalSpeed * 6f, 0) * elapsedSeconds;
+            Position += new Vector2(controls.HorizontalSpeed * 12f, 0) * elapsedSeconds;
             if (controls.IsAttemptingToJump) Velocity = new Vector2(Velocity.X, 16);
         }
     }
