@@ -79,6 +79,7 @@ namespace MarioBros
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.F11)) graphics.ToggleFullScreen();
 
             gameRound.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
