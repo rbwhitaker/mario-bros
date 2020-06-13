@@ -20,9 +20,19 @@ namespace MarioBros
             foreach (GameObject gameObject in objects)
                 gameObject.Update(this, elapsedSeconds);
 
+            List<ICollisionHandler> handlers = new List<ICollisionHandler>
+            {
+                new HeadHitBlockHandler(this),
+                new SimpleObjectVsBlockCollisionHandler(),
+                new PlayerCharacterVsMonsterHandler(),
+                new MonsterVsMonsterHandler(),
+                new MonsterVsBlockBumpHandler(),
+                new MonsterVsExitPipeHandler()
+            };
+
             List<Collision> collisions = DetermineCollisions();
             foreach (Collision collision in collisions)
-                HandleCollision(collision);
+                HandleCollision(handlers, collision);
 
             objects.RemoveAll(o => !o.IsAlive);
         }
@@ -34,18 +44,8 @@ namespace MarioBros
             return objects.Where(o => o.PhysicsBox.Intersects(box));
         }
 
-        private void HandleCollision(Collision collision)
+        private void HandleCollision(IEnumerable<ICollisionHandler> handlers, Collision collision)
         {
-            List<ICollisionHandler> handlers = new List<ICollisionHandler>
-            {
-                new HeadHitBlockHandler(this),
-                new SimpleObjectVsBlockCollisionHandler(),
-                new PlayerCharacterVsMonsterHandler(),
-                new MonsterVsMonsterHandler(),
-                new MonsterVsBlockBumpHandler(),
-                new MonsterVsExitPipeHandler()
-            };
-
             foreach(ICollisionHandler handler in handlers.Where(h => h.ShouldHandle(collision)))
                 handler.Handle(collision.A, collision.B, collision.Directions);
         }
