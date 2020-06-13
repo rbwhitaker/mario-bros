@@ -9,6 +9,7 @@ namespace MarioBros
         public Dimensions VisualDimensions { get; }
         public Box VisualBox => new Box(Position, VisualDimensions);
         public Box PhysicsBox => new Box(Position, PhysicsDimensions);
+        public Box PreviousPhysicsBox { get; private set; }
 
         public GameObject(Dimensions visualDimensions, Dimensions physicsDimensions)
         {
@@ -16,6 +17,12 @@ namespace MarioBros
             VisualDimensions = visualDimensions;
         }
         
-        public abstract void Update(float elapsedSeconds);
+        public void Update(float elapsedSeconds)
+        {
+            PreviousPhysicsBox = PhysicsBox;
+            UpdateCore(elapsedSeconds);
+        }
+
+        public abstract void UpdateCore(float elapsedSeconds);
     }
 }

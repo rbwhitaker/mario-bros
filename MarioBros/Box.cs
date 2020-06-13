@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace MarioBros
 {
@@ -18,6 +19,15 @@ namespace MarioBros
             Right = position.X + dimensions.Right;
             Top = position.Y + dimensions.Top;
             Bottom = position.Y - dimensions.Bottom;
+        }
+
+        internal bool Intersects(Box other)
+        {
+            if (Left > other.Right) return false;
+            if (Right < other.Left) return false;
+            if (Top < other.Bottom) return false;
+            if (Bottom > other.Top) return false;
+            return true;
         }
     }
 }

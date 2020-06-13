@@ -12,6 +12,6 @@ namespace MarioBros
             Position = position;
         }
 
-        public override void Update(float elapsedSeconds) { }
+        public override void UpdateCore(float elapsedSeconds) { }
     }
 }

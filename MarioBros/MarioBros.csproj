@@ -45,6 +45,7 @@
     <Compile Include="AxisAlignedBoundingBox.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Box.cs" />
+    <Compile Include="Collision.cs" />
     <Compile Include="Dimensions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRound.cs" />

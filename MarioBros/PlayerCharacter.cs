@@ -9,7 +9,7 @@ namespace MarioBros
 
         public PlayerCharacter() : base(CharacterPhysicsDimensions, CharacterVisualDimensions) { }
 
-        public override void Update(float elapsedSeconds)
+        public override void UpdateCore(float elapsedSeconds)
         {
             // Gravity
             Position += new Vector2(0, -8f) * elapsedSeconds;
