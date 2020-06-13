@@ -14,6 +14,8 @@ namespace MarioBros
             // Gravity
             Velocity -= new Vector2(0, 62f) * elapsedSeconds;
             Position += Velocity * elapsedSeconds;
+            if (Position.X < 0) Position += new Vector2(round.WorldSize.X, 0);
+            if (Position.X > round.WorldSize.X) Position -= new Vector2(round.WorldSize.X, 0);
         }
     }
 

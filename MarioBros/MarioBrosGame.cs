@@ -42,10 +42,7 @@ namespace MarioBros
                 gameRound.Add(new Block(0.5f + column, 0.5f));
                 gameRound.Add(new Block(0.5f + column, 1.5f));
             }
-
-            gameRound.Add(new Block(0.5f, 2.5f));
-            gameRound.Add(new Block(31.5f, 2.5f));
-
+            
             gameRound.Add(new Block(0.5f, 7.5f));
             gameRound.Add(new Block(1.5f, 7.5f));
             gameRound.Add(new Block(2.5f, 7.5f));

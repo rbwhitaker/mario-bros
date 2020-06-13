@@ -33,6 +33,11 @@
             Bottom = bottom;
         }
 
+        public static Dimensions operator *(Dimensions dimensions, float scalar)
+        {
+            return new Dimensions(dimensions.Left * scalar, dimensions.Right * scalar, dimensions.Top * scalar, dimensions.Bottom * scalar);
+        }
+
         public Dimensions(float allDirections) : this(allDirections, allDirections, allDirections, allDirections) { }
     }
 }

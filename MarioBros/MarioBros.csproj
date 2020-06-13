@@ -55,6 +55,7 @@
     <Compile Include="IPlayerControls.cs" />
     <Compile Include="KeyboardControls.cs" />
     <Compile Include="MarioBrosGame.cs" />
+    <Compile Include="MonsterVsMonsterHandler.cs" />
     <Compile Include="PlayerCharacter.cs" />
     <Compile Include="PlayerCharacterVsBlockCollisionHandler.cs" />
     <Compile Include="PlayerCharacterVsMonsterHandler.cs" />

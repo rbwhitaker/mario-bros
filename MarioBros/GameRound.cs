@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MarioBros
@@ -24,6 +25,8 @@ namespace MarioBros
                 HandleCollision(collision);
         }
 
+        public Vector2 WorldSize => new Vector2(32, 25);
+
         public IEnumerable<GameObject> ObjectsIn(Box box)
         {
             return objects.Where(o => o.PhysicsBox.Intersects(box));
@@ -35,9 +38,11 @@ namespace MarioBros
             {
                 new SimpleObjectVsBlockCollisionHandler(),
                 new PlayerCharacterVsMonsterHandler(),
+                new MonsterVsMonsterHandler()
             };
 
-            handlers.FirstOrDefault(h => h.ShouldHandle(collision))?.Handle(collision.A, collision.B);
+            foreach(ICollisionHandler handler in handlers.Where(h => h.ShouldHandle(collision)))
+                handler.Handle(collision.A, collision.B);
         }
 
         private List<Collision> DetermineCollisions()
