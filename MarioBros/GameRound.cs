@@ -33,7 +33,8 @@ namespace MarioBros
         {
             List<ICollisionHandler> handlers = new List<ICollisionHandler>
             {
-                new SimpleObjectVsBlockCollisionHandler()
+                new SimpleObjectVsBlockCollisionHandler(),
+                new PlayerCharacterVsMonsterHandler(),
             };
 
             handlers.FirstOrDefault(h => h.ShouldHandle(collision))?.Handle(collision.A, collision.B);

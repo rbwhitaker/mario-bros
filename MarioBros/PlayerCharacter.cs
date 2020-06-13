@@ -25,6 +25,13 @@ namespace MarioBros
 
 
         private readonly IPlayerControls controls;
+        public int Lives { get; private set; }
+        public void Kill()
+        {
+            Lives--;
+            Position = new Vector2(16, 22);
+            Velocity = new Vector2(0, 0);
+        }
 
         public PlayerCharacter(IPlayerControls controls) : base(CharacterVisualDimensions, CharacterPhysicsDimensions)
         {
