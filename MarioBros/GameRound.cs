@@ -35,6 +35,11 @@ namespace MarioBros
                     p.Position = new Vector2(p.Position.X, b.PhysicsBox.Top + 0.01f);
                     p.Velocity = new Vector2(p.Velocity.X, 0);
                 }
+                if(p.PhysicsBox.Top >= b.PhysicsBox.Bottom && p.PreviousPhysicsBox.Top < b.PhysicsBox.Bottom)
+                {
+                    p.Position = new Vector2(p.Position.X, b.PhysicsBox.Bottom - p.PhysicsDimensions.Height - 0.01f);
+                    p.Velocity = new Vector2(p.Velocity.X, 0);
+                }
             }
         }
 

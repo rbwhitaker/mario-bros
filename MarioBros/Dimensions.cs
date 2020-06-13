@@ -22,6 +22,9 @@
         /// </summary>
         public float Bottom { get; }
 
+        public float Height => Bottom + Top;
+        public float Widht => Left + Right;
+
         public Dimensions(float left, float right, float top, float bottom)
         {
             Left = left;
