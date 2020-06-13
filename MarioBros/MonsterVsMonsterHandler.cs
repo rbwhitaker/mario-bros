@@ -4,10 +4,8 @@
     {
         public override void Handle(Shellcreeper a, Shellcreeper b, CollisionDirections directions)
         {
-            a.Direction = FlipDirection(a.Direction);
-            b.Direction = FlipDirection(b.Direction);
+            a.Direction = a.Direction.Opposite();
+            b.Direction = b.Direction.Opposite();
         }
-
-        private Direction FlipDirection(Direction original) => original == Direction.Left ? Direction.Right : Direction.Left;
     }
 }

@@ -41,7 +41,8 @@ namespace MarioBros
                 new HeadHitBlockHandler(this),
                 new SimpleObjectVsBlockCollisionHandler(),
                 new PlayerCharacterVsMonsterHandler(),
-                new MonsterVsMonsterHandler()
+                new MonsterVsMonsterHandler(),
+                new MonsterVsBlockBumpHandler()
             };
 
             foreach(ICollisionHandler handler in handlers.Where(h => h.ShouldHandle(collision)))
