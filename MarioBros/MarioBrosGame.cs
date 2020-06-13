@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace MarioBros
 {
@@ -12,7 +13,8 @@ namespace MarioBros
         private SpriteBatch spriteBatch;
         private GameRound gameRound;
         private BasicRenderer renderer;
-
+        Song backgroundMusic;
+        
         private const float PixelsPerUnit = 16;
 
         public MarioBrosGame()
@@ -28,6 +30,8 @@ namespace MarioBros
             base.Initialize();
             gameRound = GenerateGameRound();
             renderer = new BasicRenderer(Content);
+            backgroundMusic = Content.Load<Song>("Ragtime");
+            MediaPlayer.Play(backgroundMusic);
         }
 
         private GameRound GenerateGameRound()
@@ -77,6 +81,8 @@ namespace MarioBros
                 Exit();
 
             gameRound.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (MediaPlayer.State == MediaState.Stopped) MediaPlayer.Play(backgroundMusic);
 
             base.Update(gameTime);
         }
