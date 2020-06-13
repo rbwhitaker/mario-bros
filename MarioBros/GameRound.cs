@@ -9,6 +9,7 @@ namespace MarioBros
         private readonly List<GameObject> objects = new List<GameObject>();
 
         public IEnumerable<GameObject> Objects => objects;
+        public int score = 0;
 
         public void Add(GameObject newObject)
         {
@@ -20,10 +21,36 @@ namespace MarioBros
             foreach (GameObject gameObject in objects)
                 gameObject.Update(this, elapsedSeconds);
 
+            List<ICollisionHandler> handlers = new List<ICollisionHandler>
+            {
+                new HeadHitBlockHandler(this),
+                new SimpleObjectVsBlockCollisionHandler(),
+                new PlayerCharacterVsMonsterHandler(),
+                new MonsterVsMonsterHandler(),
+                new MonsterVsBlockBumpHandler(),
+                new MonsterVsExitPipeHandler(),
+                new PlayerCharacterVsCoinHandler(),
+                new CoinVsBlockBumpHandler(),
+                new CoinVsExitPipeHandler()
+
+            };
+
             List<Collision> collisions = DetermineCollisions();
             foreach (Collision collision in collisions)
-                HandleCollision(collision);
+                HandleCollision(handlers, collision);
 
+
+            List<GameObject> toAdd = new List<GameObject>();
+            foreach (GameObject thisObject in objects)
+            {
+                if (thisObject is Monster && !thisObject.IsAlive)
+                {
+                    score += 800;
+                    toAdd.Add(new Coin(2, 23));
+                }
+            }
+
+            objects.AddRange(toAdd);
             objects.RemoveAll(o => !o.IsAlive);
         }
 
@@ -34,19 +61,8 @@ namespace MarioBros
             return objects.Where(o => o.PhysicsBox.Intersects(box));
         }
 
-        private void HandleCollision(Collision collision)
+        private void HandleCollision(IEnumerable<ICollisionHandler> handlers, Collision collision)
         {
-            List<ICollisionHandler> handlers = new List<ICollisionHandler>
-            {
-                new HeadHitBlockHandler(this),
-                new SimpleObjectVsBlockCollisionHandler(),
-                new PlayerCharacterVsMonsterHandler(),
-                new PlayerCharacterVsPOWBlockHandler(objects.OfType<Monster>().ToList()),
-                new MonsterVsMonsterHandler(),
-                new MonsterVsBlockBumpHandler(),
-                new MonsterVsExitPipeHandler()
-            };
-
             foreach(ICollisionHandler handler in handlers.Where(h => h.ShouldHandle(collision)))
                 handler.Handle(collision.A, collision.B, collision.Directions);
         }
