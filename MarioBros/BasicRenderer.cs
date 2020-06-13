@@ -14,7 +14,7 @@ namespace MarioBros
         ContentManager content;
         SpriteBatch spriteBatch;
         SpriteFont font;
-        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
+        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, Brick, TurtleBack;
         private Texture2D StraightPipe, CurvedPipe;
 
         public BasicRenderer(ContentManager Content)
@@ -24,7 +24,8 @@ namespace MarioBros
             Mario_Left = Content.Load<Texture2D>("M1L");
             Mario_Right = Content.Load<Texture2D>("M1R");
             Creeper = Content.Load<Texture2D>("Creeper");
-            Block = Content.Load<Texture2D>("Block");
+            Block = Content.Load<Texture2D>("SmallBlock");
+            Brick = Content.Load<Texture2D>("Brick");
             TurtleBack = Content.Load<Texture2D>("turtleback");
             StraightPipe = Content.Load<Texture2D>("StraightPipe");
             CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
@@ -39,7 +40,8 @@ namespace MarioBros
             foreach (GameObject gameObject in gameRound.Objects)
             {
                 
-                if (gameObject is Block b) DrawBlock(b);
+                if (gameObject is Brick brick) DrawBrick(brick);
+                else if (gameObject is Block b) DrawBlock(b);
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
@@ -76,6 +78,13 @@ namespace MarioBros
         }
 
         private const float PixelsPerUnit = 16;
+
+        private void DrawBrick(Brick b)
+        {
+            Box visualBox = b.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            spriteBatch.Draw(Brick, bounds, Color.White);
+        }
 
         private void DrawBlock(Block b)
         {
