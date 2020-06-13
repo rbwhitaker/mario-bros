@@ -3,20 +3,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using IronPython.Hosting;
+using IronPython.Runtime;
 
 namespace MarioBros
 {
     class LevelLoader
     {
-        private Dictionary<int, ObjectCreator> ObjectCreators { get; }
+        private Dictionary<int, string> TileExpressions { get; }
         private string levelSource;
+        private Microsoft.Scripting.Hosting.ScriptEngine scriptEngine;
+
+        private const float TILE_SIZE = 1.0f;
+        private const float X_OFFSET = 0.5f;
+        private const float Y_OFFSET = 0.5f;
+
 
         public LevelLoader(string levelSource)
         {
-            ObjectCreators = new Dictionary<int, ObjectCreator>();
+            TileExpressions = new Dictionary<int, string>();
             this.levelSource = levelSource;
+
+            scriptEngine = Python.CreateEngine();
+            scriptEngine.Runtime.LoadAssembly(Assembly.GetExecutingAssembly());
+            scriptEngine.Runtime.LoadAssembly(Assembly.GetAssembly(typeof(Microsoft.Xna.Framework.Vector2)));
+
             ParseTiles();
         }
 
@@ -27,7 +41,37 @@ namespace MarioBros
                 throw new ContentLoadException("Level does not contain LEVEL section.");
             }
 
+            int xCounter = -1;
+            int yCounter = -1;
 
+            for (int index = levelSource.IndexOf("LEVEL") + 5; index < levelSource.Length; index++)
+            {
+                char curChar = levelSource[index];
+
+                if(curChar == '\n')
+                {
+                    yCounter++;
+                    xCounter = -1;
+                    continue;
+                }
+
+                if (char.IsWhiteSpace(curChar))
+                {
+                    continue;
+                }
+
+                if (char.IsNumber(curChar))
+                {
+                    xCounter++;
+                    int currentId = int.Parse(curChar.ToString());
+                    if(!TileExpressions.TryGetValue(currentId, out var expression))
+                    {
+                        throw new ContentLoadException($"Undefinied tile ID at position {index}.");
+                    }
+
+                    gameRound.Add(CreateObject(expression, TILE_SIZE * (xCounter + X_OFFSET), TILE_SIZE * (yCounter + Y_OFFSET)));
+                }
+            }
         }
 
         private void ParseTiles()
@@ -37,84 +81,59 @@ namespace MarioBros
                 throw new ContentLoadException("Level does not contain TILES section.");
             }
 
-            for (int index = levelSource.IndexOf("TILES") + 5; index < levelSource.Length; index++)
+            int currentId = -1;
+            bool parsingExpression = false;
+            string expression = "";
+            int endIndex = levelSource.IndexOf("LEVEL");
+
+            for (int index = levelSource.IndexOf("TILES") + 5; index < levelSource.Length && index != endIndex; index++)
             {
                 char curChar = levelSource[index];
-                if(char.IsWhiteSpace(curChar))
+                if(currentId == -1 && char.IsNumber(curChar))
+                {
+                    currentId = int.Parse(curChar.ToString());
+                }
+                else if(currentId == -1)
                 {
                     continue;
+                }
+
+                if (curChar == '{')
+                {
+                    parsingExpression = true;
+                }
+                else if(curChar == '}')
+                {
+                    parsingExpression = false;
+                    TileExpressions.Add(currentId, expression);
+                    currentId = -1;
+                    expression = "";
+                }
+                else if(parsingExpression)
+                {
+                    expression += curChar;
                 }
             }
         }
 
-        private class ObjectCreator
+        private GameObject CreateObject(string expression, float x, float y)
         {
-            public Dictionary<string, string> Arguments { get; }
-            public Type GameObjectType { get; }
+            expression = "from MarioBros import *\r\nfrom Microsoft.Xna.Framework import *\r\n" + expression;
 
-            public ObjectCreator(Type gameObjectType)
+            var source = scriptEngine.CreateScriptSourceFromString(expression);
+            var scope = scriptEngine.CreateScope();
+
+            scope.SetVariable("x", x);
+            scope.SetVariable("y", y);
+
+            source.Execute(scope);
+
+            if(!scope.ContainsVariable("tile"))
             {
-                Arguments = new Dictionary<string, string>();
-                GameObjectType = gameObjectType;
+                throw new InvalidOperationException("Tile script does not set the 'tile' variable appropriately.");
             }
 
-            public GameObject Create()
-            {
-                var result = InstantiateObject();
-
-                foreach (var property in GameObjectType.GetProperties())
-                {
-                    if(!property.CanWrite)
-                    {
-                        continue;
-                    }
-                    if(Arguments.TryGetValue(property.Name, out var expression))
-                    {
-                        property.SetValue(result, Eval(expression, property.PropertyType));
-                    }
-                }
-
-                return result;
-            }
-
-            private GameObject InstantiateObject()
-            {
-                var ctors = GameObjectType.GetConstructors();
-
-                var defaultCtor = GameObjectType.GetConstructor(Type.EmptyTypes);
-                if (defaultCtor != null)
-                {
-                    return (GameObject)Activator.CreateInstance(GameObjectType);
-                }
-
-                object[] ctorParameters = new object[0];
-                foreach (var item in ctors)
-                {
-                    var parameterDefinitions = item.GetParameters();
-                    ctorParameters = new object[parameterDefinitions.Length];
-
-                    for (int i = 0; i < parameterDefinitions.Length; i++)
-                    {
-                        var param = parameterDefinitions[i];
-                        if (Arguments.TryGetValue(param.Name, out var expression))
-                        {
-                            ctorParameters[i] = Eval(expression, param.ParameterType);
-                        }
-                        else
-                        {
-                            ctorParameters = new object[0];
-                            break;
-                        }
-                    }
-                }
-
-                return (GameObject)Activator.CreateInstance(GameObjectType, ctorParameters);
-            }
-
-            private object Eval(string expression, Type targetType)
-            {
-                return null;
-            }
+            return scope.GetVariable("tile");
         }
     }
 }

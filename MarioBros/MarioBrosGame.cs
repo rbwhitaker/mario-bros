@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -33,6 +34,7 @@ namespace MarioBros
         {
             GameRound gameRound = new GameRound();
 
+            /*
             gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
 
             gameRound.Add(new Block(0.5f, 0.5f));
@@ -44,6 +46,10 @@ namespace MarioBros
             gameRound.Add(new Block(0.5f, 7.5f));
             gameRound.Add(new Block(1.5f, 7.5f));
             gameRound.Add(new Block(2.5f, 7.5f));
+            */
+
+            LevelLoader loader = new LevelLoader(File.ReadAllText("level.txt"));
+            loader.LoadLevel(gameRound);
 
             return gameRound;
         }
@@ -78,6 +84,6 @@ namespace MarioBros
             base.Draw(gameTime);
         }
 
-       
+
     }
 }
