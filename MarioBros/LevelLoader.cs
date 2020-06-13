@@ -69,7 +69,7 @@ namespace MarioBros
                         float x = TILE_SIZE * (xCounter + X_OFFSET);
                         float y = TILE_SIZE * (yCounter + Y_OFFSET);
 
-                        x = 32 - x;
+                        //x = 32 - x;
                         y = 25 - y;
 
                         gameRound.Add(CreateObject(expression, x, y));
