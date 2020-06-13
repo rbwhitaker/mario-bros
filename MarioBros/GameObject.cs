@@ -5,11 +5,12 @@ namespace MarioBros
     public abstract class GameObject
     {
         public Vector2 Position { get; set; }
-        public Dimensions PhysicsDimensions { get; }
-        public Dimensions VisualDimensions { get; }
-        public Box VisualBox => new Box(Position, VisualDimensions);
-        public Box PhysicsBox => new Box(Position, PhysicsDimensions);
+        public virtual Dimensions PhysicsDimensions { get; }
+        public virtual Dimensions VisualDimensions { get; }
+        public virtual Box VisualBox => new Box(Position, VisualDimensions);
+        public virtual Box PhysicsBox => new Box(Position, PhysicsDimensions);
         public Box PreviousPhysicsBox { get; private set; }
+        public bool IsAlive { get; protected set; } = true;
 
         public GameObject(Dimensions visualDimensions, Dimensions physicsDimensions)
         {

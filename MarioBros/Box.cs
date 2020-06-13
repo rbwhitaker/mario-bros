@@ -21,6 +21,14 @@ namespace MarioBros
             Bottom = position.Y - dimensions.Bottom;
         }
 
+        public Box(float left, float right, float top, float bottom)
+        {
+            Left = left;
+            Right = right;
+            Top = top;
+            Bottom = bottom;
+        }
+
         internal bool Intersects(Box other)
         {
             if (Left > other.Right) return false;
@@ -28,6 +36,11 @@ namespace MarioBros
             if (Top < other.Bottom) return false;
             if (Bottom > other.Top) return false;
             return true;
+        }
+
+        public Box Shift(Vector2 amount)
+        {
+            return new Box(Left + amount.X, Right + amount.X, Top + amount.Y, Bottom + amount.Y);
         }
     }
 }

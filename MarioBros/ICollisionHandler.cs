@@ -3,6 +3,11 @@
     public interface ICollisionHandler
     {
         bool ShouldHandle(Collision collision);
-        void Handle(GameObject a, GameObject b);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="directions">Indicates if `a` entered into `b` from any of the four directions specified by `directions`.</param>
+        void Handle(GameObject a, GameObject b, CollisionDirections directions);
     }
 }
