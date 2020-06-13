@@ -50,7 +50,7 @@ namespace MarioBros
             
             if (c.Direction) { spriteBatch.Draw(Mario_Right, bounds, Color.White); }
             if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }            
-            spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
+            //spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
         }
 
         private void DrawShellCreeper(Shellcreeper shellcreeper)
