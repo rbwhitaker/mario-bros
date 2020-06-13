@@ -18,6 +18,9 @@ namespace MarioBros
         private Texture2D StraightPipe, CurvedPipe, Stepper;
 
         private Texture2D POW1, POW2, POW3;
+
+        private const float PixelsPerUnit = 16;
+
         public BasicRenderer(ContentManager Content)
         {
             content = Content;

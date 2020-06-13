@@ -31,7 +31,8 @@ namespace MarioBros
                 new MonsterVsExitPipeHandler(),
                 new PlayerCharacterVsCoinHandler(),
                 new CoinVsBlockBumpHandler(),
-                new CoinVsExitPipeHandler()
+                new CoinVsExitPipeHandler(),
+                new PlayerCharacterVsPOWBlockHandler(objects.OfType<Monster>()),
 
             };
 
