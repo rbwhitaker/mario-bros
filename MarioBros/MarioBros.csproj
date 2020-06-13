@@ -59,6 +59,7 @@
     <Compile Include="KeyboardControls.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="MarioBrosGame.cs" />
+    <Compile Include="MonsterVsBlockBumpHandler.cs" />
     <Compile Include="MonsterVsMonsterHandler.cs" />
     <Compile Include="PlayerCharacter.cs" />
     <Compile Include="PlayerCharacterVsBlockCollisionHandler.cs" />
