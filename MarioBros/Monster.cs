@@ -6,7 +6,7 @@ namespace MarioBros
     public abstract class Monster : SimpleObject
     {
         private static readonly Dimensions GroundArea = new Dimensions(1, 1, -0.01f, 0.25f);
-        public bool IsStunned { get; set; }
+        public bool IsStunned { get; protected set; }
         public Direction Direction { get; set; }
         protected float speed;
 
@@ -17,6 +17,8 @@ namespace MarioBros
         {
             IsAlive = false;
         }
+
+        public abstract void Hit();
 
         public override void UpdateCore(GameRound round, float elapsedSeconds)
         {

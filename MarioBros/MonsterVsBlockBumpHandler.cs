@@ -11,7 +11,7 @@ namespace MarioBros
             if (handled.Contains(a)) return;
 
             handled.Add(a);
-            a.IsStunned = !a.IsStunned;
+            a.Hit();
             a.Velocity = new Vector2(0, 24);
             a.Direction = a.Direction.Opposite();
         }

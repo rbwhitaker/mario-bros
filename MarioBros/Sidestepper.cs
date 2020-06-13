@@ -10,6 +10,12 @@
 
         public bool IsAngry { get; private set; }
 
+        public override void Hit()
+        {
+            if (!IsAngry) IsAngry = true;
+            else IsStunned = !IsStunned;
+        }
+
         public Sidestepper() : base(SidestepperVisualDimensions, SidestepperPhysicsDimensions)
         {
             speed = SidestepperSpeed;

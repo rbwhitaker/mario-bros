@@ -10,6 +10,11 @@ namespace MarioBros
 
         private static readonly Dimensions ShellcreeperVisualDimensions = new Dimensions(1, 1, 2, 0);
 
+        public override void Hit()
+        {
+            IsStunned = !IsStunned;
+        }
+
         public Shellcreeper() : base(ShellcreeperVisualDimensions, ShellcreeperPhysicsDimensions)
         {
             speed = ShellcreeperSpeed;
