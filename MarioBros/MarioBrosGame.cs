@@ -19,6 +19,8 @@ namespace MarioBros
         protected override void Initialize()
         {
             base.Initialize();
+
+            gameRound = new GameRound();
         }
 
         protected override void LoadContent()
@@ -35,12 +37,16 @@ namespace MarioBros
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            gameRound.Update(gameTime.ElapsedGameTime.TotalSeconds);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
+            
 
             base.Draw(gameTime);
         }

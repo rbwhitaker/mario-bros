@@ -2,6 +2,6 @@
 {
     public abstract class GameObject
     {
-        public abstract void Update(double elapsedTime);
+        public abstract void Update(double elapsedSeconds);
     }
 }
