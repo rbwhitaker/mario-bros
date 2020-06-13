@@ -14,7 +14,8 @@ namespace MarioBros
         ContentManager content;
         SpriteBatch spriteBatch;
         SpriteFont font;
-        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block;
+        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
+        private Texture2D StraightPipe, CurvedPipe;
 
         public BasicRenderer(ContentManager Content)
         {
@@ -24,6 +25,9 @@ namespace MarioBros
             Mario_Right = Content.Load<Texture2D>("M1R");
             Creeper = Content.Load<Texture2D>("Creeper");
             Block = Content.Load<Texture2D>("Block");
+            TurtleBack = Content.Load<Texture2D>("turtleback");
+            StraightPipe = Content.Load<Texture2D>("StraightPipe");
+            CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
 
             font = Content.Load<SpriteFont>("Font");
         }
@@ -75,7 +79,7 @@ namespace MarioBros
         {
             Box visualBox = pipe.PhysicsBox;
             Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.LightGreen);
+            if (bounds.X == 0) { spriteBatch.Draw(StraightPipe, bounds, null, Color.LightGreen, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0.0f); } else { spriteBatch.Draw(StraightPipe, bounds, Color.LightGreen); }
         }
 
         private void DrawBlockBump(BlockBump b)
