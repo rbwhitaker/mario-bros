@@ -2,9 +2,9 @@
 
 namespace MarioBros
 {
-    public class PlayerCharacterVsBlockCollisionHandler : CollisionHandler<PlayerCharacter, Block>
+    public class SimpleObjectVsBlockCollisionHandler : CollisionHandler<SimpleObject, Block>
     {
-        public override void Handle(PlayerCharacter p, Block b)
+        public override void Handle(SimpleObject p, Block b)
         {
             if (p.PhysicsBox.Bottom <= b.PhysicsBox.Top && p.PreviousPhysicsBox.Bottom > b.PhysicsBox.Top)
             {

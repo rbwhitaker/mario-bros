@@ -33,16 +33,16 @@ namespace MarioBros
         {
             List<ICollisionHandler> handlers = new List<ICollisionHandler>
             {
-                new PlayerCharacterVsBlockCollisionHandler()
+                new SimpleObjectVsBlockCollisionHandler()
             };
 
-            handlers.FirstOrDefault(h => h.ShouldHandle(collision)).Handle(collision.A, collision.B);
+            handlers.FirstOrDefault(h => h.ShouldHandle(collision))?.Handle(collision.A, collision.B);
         }
 
         private List<Collision> DetermineCollisions()
         {
             List<Collision> collisions = new List<Collision>();
-            foreach (GameObject a in objects.OfType<PlayerCharacter>())
+            foreach (GameObject a in objects.OfType<SimpleObject>())
             {
                 foreach (GameObject b in objects)
                 {
