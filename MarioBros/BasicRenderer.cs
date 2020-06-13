@@ -43,6 +43,7 @@ namespace MarioBros
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
+                if (gameObject is ExitPipe p) DrawExitPipe(p);
             }
         }
 
@@ -72,6 +73,13 @@ namespace MarioBros
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             spriteBatch.Draw(Block, bounds, Color.White);
+        }
+
+        private void DrawExitPipe(ExitPipe pipe)
+        {
+            Box visualBox = pipe.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            spriteBatch.Draw(simpleRectangle, bounds, Color.LightGreen);
         }
 
         private void DrawBlockBump(BlockBump b)
