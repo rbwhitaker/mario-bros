@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Linq;
 
 namespace MarioBros
@@ -32,6 +33,8 @@ namespace MarioBros
         public void Kill()
         {
             Lives--;
+            if (Lives == 0) Environment.Exit(0);
+
             Position = new Vector2(16, 22);
             Velocity = new Vector2(0, 0);
         }
