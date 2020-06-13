@@ -45,6 +45,12 @@ namespace MarioBros
             gameRound.Add(new Block(1.5f, 7.5f));
             gameRound.Add(new Block(2.5f, 7.5f));
 
+            gameRound.Add(new Block(11.5f, 7.5f));
+            gameRound.Add(new Block(12.5f, 7.5f));
+            gameRound.Add(new Block(13.5f, 7.5f));
+            gameRound.Add(new Block(14.5f, 7.5f));
+            gameRound.Add(new Block(15.5f, 7.5f));
+
             return gameRound;
         }
 

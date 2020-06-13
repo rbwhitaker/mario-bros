@@ -21,14 +21,14 @@ namespace MarioBros
         public override void UpdateCore(GameRound round, float elapsedSeconds)
         {
             // Gravity
-            Velocity -= new Vector2(0, 16f) * elapsedSeconds;
+            Velocity -= new Vector2(0, 62f) * elapsedSeconds;
             Position += Velocity * elapsedSeconds;
 
             controls.Update(elapsedSeconds);
-            Position += new Vector2(controls.HorizontalSpeed * 12f, 0) * elapsedSeconds;
+            Position += new Vector2(controls.HorizontalSpeed * 20f, 0) * elapsedSeconds;
             if (controls.IsAttemptingToJump)
                 if(round.ObjectsIn(new Box(Position, JumpArea)).Any())
-                    Velocity = new Vector2(Velocity.X, 16);
+                    Velocity = new Vector2(Velocity.X, 30);
         }
     }
 }
