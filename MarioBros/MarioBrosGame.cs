@@ -36,13 +36,15 @@ namespace MarioBros
 
             /*
             gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
+            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10), Direction = Direction.Left });
+            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10), Direction = Direction.Right });
 
-            gameRound.Add(new Block(0.5f, 0.5f));
-            gameRound.Add(new Block(1.5f, 0.5f));
-            gameRound.Add(new Block(2.5f, 0.5f));
-            gameRound.Add(new Block(3.5f, 0.5f));
-            gameRound.Add(new Block(4.5f, 0.5f));
-
+            for(int column = 0; column < 32; column++)
+            {
+                gameRound.Add(new Block(0.5f + column, 0.5f));
+                gameRound.Add(new Block(0.5f + column, 1.5f));
+            }
+            
             gameRound.Add(new Block(0.5f, 7.5f));
             gameRound.Add(new Block(1.5f, 7.5f));
             gameRound.Add(new Block(2.5f, 7.5f));
@@ -50,6 +52,12 @@ namespace MarioBros
 
             LevelLoader loader = new LevelLoader(File.ReadAllText("level.txt"));
             loader.LoadLevel(gameRound);
+
+            gameRound.Add(new Block(11.5f, 7.5f));
+            gameRound.Add(new Block(12.5f, 7.5f));
+            gameRound.Add(new Block(13.5f, 7.5f));
+            gameRound.Add(new Block(14.5f, 7.5f));
+            gameRound.Add(new Block(15.5f, 7.5f));
 
             return gameRound;
         }
