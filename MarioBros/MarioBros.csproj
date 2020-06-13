@@ -51,6 +51,7 @@
     <Compile Include="CollisionHandler.cs" />
     <Compile Include="Dimensions.cs" />
     <Compile Include="DirectionExtensions.cs" />
+    <Compile Include="ExitPipe.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRound.cs" />
     <Compile Include="HeadHitBlockHandler.cs" />
