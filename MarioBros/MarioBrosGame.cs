@@ -34,6 +34,7 @@ namespace MarioBros
             GameRound gameRound = new GameRound();
 
             gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
+            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10) });
 
             for(int column = 0; column < 32; column++)
             {

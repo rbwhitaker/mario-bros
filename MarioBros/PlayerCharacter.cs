@@ -13,7 +13,7 @@ namespace MarioBros
 
         private readonly IPlayerControls controls;
 
-        public PlayerCharacter(IPlayerControls controls) : base(CharacterPhysicsDimensions, CharacterVisualDimensions)
+        public PlayerCharacter(IPlayerControls controls) : base(CharacterVisualDimensions, CharacterPhysicsDimensions)
         {
             this.controls = controls;
         }
