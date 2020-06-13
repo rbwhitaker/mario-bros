@@ -7,7 +7,10 @@ namespace MarioBros
         private static readonly Dimensions BlockDimensions = new Dimensions(0.5f);
 
         public Block(float x, float y) : this(new Vector2(x, y)) { }
-        public Block(Vector2 position) : base(BlockDimensions, BlockDimensions) { }
+        public Block(Vector2 position) : base(BlockDimensions, BlockDimensions)
+        {
+            Position = position;
+        }
 
         public override void Update(double elapsedSeconds) { }
     }

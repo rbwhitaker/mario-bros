@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AxisAlignedBoundingBox.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="Box.cs" />
     <Compile Include="Dimensions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRound.cs" />
