@@ -35,11 +35,11 @@ namespace MarioBros
 
             gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
 
-            gameRound.Add(new Block(0.5f, 0.5f));
-            gameRound.Add(new Block(1.5f, 0.5f));
-            gameRound.Add(new Block(2.5f, 0.5f));
-            gameRound.Add(new Block(3.5f, 0.5f));
-            gameRound.Add(new Block(4.5f, 0.5f));
+            for(int column = 0; column < 32; column++)
+            {
+                gameRound.Add(new Block(0.5f + column, 0.5f));
+                gameRound.Add(new Block(0.5f + column, 1.5f));
+            }
 
             gameRound.Add(new Block(0.5f, 7.5f));
             gameRound.Add(new Block(1.5f, 7.5f));
