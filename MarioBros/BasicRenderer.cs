@@ -14,7 +14,7 @@ namespace MarioBros
         ContentManager content;
         SpriteBatch spriteBatch;
         SpriteFont font;
-        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
+        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, Brick, TurtleBack;
         private Texture2D StraightPipe, CurvedPipe, Stepper;
 
         private const float PixelsPerUnit = 16;
@@ -26,7 +26,8 @@ namespace MarioBros
             Mario_Left = Content.Load<Texture2D>("M1L");
             Mario_Right = Content.Load<Texture2D>("M1R");
             Creeper = Content.Load<Texture2D>("Creeper");
-            Block = Content.Load<Texture2D>("Block");
+            Block = Content.Load<Texture2D>("SmallBlock");
+            Brick = Content.Load<Texture2D>("Brick");
             TurtleBack = Content.Load<Texture2D>("turtleback");
             StraightPipe = Content.Load<Texture2D>("StraightPipe");
             CurvedPipe = Content.Load<Texture2D>("CurvedPipe");
@@ -41,7 +42,8 @@ namespace MarioBros
             foreach (GameObject gameObject in gameRound.Objects)
             {
                 
-                if (gameObject is Block b) DrawBlock(b);
+                if (gameObject is Brick brick) DrawBrick(brick);
+                else if (gameObject is Block b) DrawBlock(b);
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
@@ -57,7 +59,8 @@ namespace MarioBros
             Box visualBox = stepper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(Stepper, bounds, Color.White);
+            spriteBatch.Draw(Stepper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), stepper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
+
         }
 
         private void DrawPlayerCharacter(PlayerCharacter c)
@@ -87,6 +90,13 @@ namespace MarioBros
             spriteBatch.Draw(Creeper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), shellcreeper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
         }
 
+        private void DrawBrick(Brick b)
+        {
+            Box visualBox = b.VisualBox;
+            Rectangle bounds = ToPixels(visualBox);
+            spriteBatch.Draw(Brick, bounds, Color.White);
+        }
+
         private void DrawBlock(Block b)
         {
             Box visualBox = b.VisualBox;
@@ -105,7 +115,7 @@ namespace MarioBros
         {
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.Red);
+            spriteBatch.Draw(simpleRectangle, bounds, Color.White);
         }
 
         private Rectangle ToPixels(Box box)
