@@ -13,6 +13,7 @@ namespace MarioBros
             handled.Add(a);
             a.Hit();
             a.Velocity = new Vector2(0, 24);
+            a.Position += new Vector2(0, 0.1f);
             a.Direction = a.Direction.Opposite();
         }
     }
