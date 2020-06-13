@@ -58,7 +58,8 @@ namespace MarioBros
             Box visualBox = stepper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(Stepper, bounds, Color.White);
+            spriteBatch.Draw(Stepper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), stepper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
+
         }
 
         private void DrawPlayerCharacter(PlayerCharacter c)
@@ -113,7 +114,7 @@ namespace MarioBros
         {
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.Red);
+            spriteBatch.Draw(simpleRectangle, bounds, Color.White);
         }
 
         private Rectangle ToPixels(Box box)
