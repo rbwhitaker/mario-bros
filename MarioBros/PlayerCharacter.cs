@@ -1,4 +1,6 @@
-﻿namespace MarioBros
+﻿using Microsoft.Xna.Framework;
+
+namespace MarioBros
 {
     public class PlayerCharacter : GameObject
     {
@@ -7,9 +9,10 @@
 
         public PlayerCharacter() : base(CharacterPhysicsDimensions, CharacterVisualDimensions) { }
 
-        public override void Update(double elapsedSeconds)
+        public override void Update(float elapsedSeconds)
         {
-
+            // Gravity
+            Position += new Vector2(0, -8f) * elapsedSeconds;
         }
     }
 }

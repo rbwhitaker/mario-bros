@@ -62,7 +62,7 @@ namespace MarioBros
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            gameRound.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            gameRound.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
         }
