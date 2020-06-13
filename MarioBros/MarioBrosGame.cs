@@ -34,13 +34,17 @@ namespace MarioBros
             GameRound gameRound = new GameRound();
 
             gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
-            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10) });
+            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10), Direction = Direction.Left });
+            gameRound.Add(new Shellcreeper() { Position = new Vector2(20, 10), Direction = Direction.Right });
 
             for(int column = 0; column < 32; column++)
             {
                 gameRound.Add(new Block(0.5f + column, 0.5f));
                 gameRound.Add(new Block(0.5f + column, 1.5f));
             }
+
+            gameRound.Add(new Block(0.5f, 2.5f));
+            gameRound.Add(new Block(31.5f, 2.5f));
 
             gameRound.Add(new Block(0.5f, 7.5f));
             gameRound.Add(new Block(1.5f, 7.5f));
