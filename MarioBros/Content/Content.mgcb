@@ -80,6 +80,12 @@
 /processorParam:TextureFormat=Color
 /build:M1R.png
 
+#begin maple-leaf-rag-by-kevin-macleod-from-filmmusic-io.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:maple-leaf-rag-by-kevin-macleod-from-filmmusic-io.mp3;RagTime.mp3
+
 #begin Rectangle16.png
 /importer:TextureImporter
 /processor:TextureProcessor
