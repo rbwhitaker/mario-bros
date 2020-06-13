@@ -4,7 +4,7 @@ namespace MarioBros
 {
     public abstract class GameObject
     {
-        public Vector2 Position { get; protected set; }
+        public Vector2 Position { get; set; }
         public Dimensions PhysicsDimensions { get; }
         public Dimensions VisualDimensions { get; }
 
