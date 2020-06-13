@@ -19,8 +19,24 @@ namespace MarioBros
         protected override void Initialize()
         {
             base.Initialize();
+            gameRound = GenerateGameRound();
+        }
 
-            gameRound = new GameRound();
+        private GameRound GenerateGameRound()
+        {
+            GameRound gameRound = new GameRound();
+
+            gameRound.Add(new Block(0.5f, 0.5f));
+            gameRound.Add(new Block(1.5f, 0.5f));
+            gameRound.Add(new Block(2.5f, 0.5f));
+            gameRound.Add(new Block(3.5f, 0.5f));
+            gameRound.Add(new Block(4.5f, 0.5f));
+
+            gameRound.Add(new Block(0.5f, 7.5f));
+            gameRound.Add(new Block(1.5f, 7.5f));
+            gameRound.Add(new Block(2.5f, 7.5f));
+
+            return gameRound;
         }
 
         protected override void LoadContent()

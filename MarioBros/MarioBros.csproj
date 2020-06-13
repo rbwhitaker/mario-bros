@@ -42,6 +42,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AxisAlignedBoundingBox.cs" />
+    <Compile Include="Block.cs" />
+    <Compile Include="Dimensions.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="GameRound.cs" />
     <Compile Include="MarioBrosGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,6 +8,11 @@ namespace MarioBros
 
         public IEnumerable<GameObject> Objects => objects;
 
+        public void Add(GameObject newObject)
+        {
+            objects.Add(newObject);
+        }
+
         public void Update(double elapsedSeconds)
         {
             foreach (GameObject gameObject in objects)
