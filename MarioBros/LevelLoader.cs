@@ -64,12 +64,16 @@ namespace MarioBros
                 {
                     xCounter++;
                     int currentId = int.Parse(curChar.ToString());
-                    if(!TileExpressions.TryGetValue(currentId, out var expression))
+                    if(TileExpressions.TryGetValue(currentId, out var expression))
                     {
-                        throw new ContentLoadException($"Undefinied tile ID at position {index}.");
-                    }
+                        float x = TILE_SIZE * (xCounter + X_OFFSET);
+                        float y = TILE_SIZE * (yCounter + Y_OFFSET);
 
-                    gameRound.Add(CreateObject(expression, TILE_SIZE * (xCounter + X_OFFSET), TILE_SIZE * (yCounter + Y_OFFSET)));
+                        x = 32 - x;
+                        y = 25 - y;
+
+                        gameRound.Add(CreateObject(expression, x, y));
+                    }
                 }
             }
         }

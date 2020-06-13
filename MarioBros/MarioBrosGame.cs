@@ -53,11 +53,11 @@ namespace MarioBros
             LevelLoader loader = new LevelLoader(File.ReadAllText("level.txt"));
             loader.LoadLevel(gameRound);
 
-            gameRound.Add(new Block(11.5f, 7.5f));
-            gameRound.Add(new Block(12.5f, 7.5f));
-            gameRound.Add(new Block(13.5f, 7.5f));
-            gameRound.Add(new Block(14.5f, 7.5f));
-            gameRound.Add(new Block(15.5f, 7.5f));
+            //gameRound.Add(new Block(11.5f, 7.5f));
+            //gameRound.Add(new Block(12.5f, 7.5f));
+            //gameRound.Add(new Block(13.5f, 7.5f));
+            //gameRound.Add(new Block(14.5f, 7.5f));
+            //gameRound.Add(new Block(15.5f, 7.5f));
 
             return gameRound;
         }
