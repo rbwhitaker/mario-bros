@@ -48,6 +48,7 @@ namespace MarioBros
                 //else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
                 if (gameObject is Sidestepper stepper) DrawSideStepper(stepper);
+                spriteBatch.DrawString(font, "Score: " + gameRound.score, new Vector2(0, 0), Color.White);
             }
         }
 
