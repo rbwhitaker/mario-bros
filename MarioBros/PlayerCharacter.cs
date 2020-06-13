@@ -7,12 +7,24 @@ namespace MarioBros
         private static readonly Dimensions CharacterPhysicsDimensions = new Dimensions(1, 1, 2, 0);
         private static readonly Dimensions CharacterVisualDimensions = new Dimensions(1, 1, 2, 0);
 
-        public PlayerCharacter() : base(CharacterPhysicsDimensions, CharacterVisualDimensions) { }
+        public Vector2 Velocity { get; set; }
+
+        private readonly IPlayerControls controls;
+
+        public PlayerCharacter(IPlayerControls controls) : base(CharacterPhysicsDimensions, CharacterVisualDimensions)
+        {
+            this.controls = controls;
+        }
 
         public override void UpdateCore(float elapsedSeconds)
         {
             // Gravity
-            Position += new Vector2(0, -8f) * elapsedSeconds;
+            Velocity -= new Vector2(0, 16f) * elapsedSeconds;
+            Position += Velocity * elapsedSeconds;
+
+            controls.Update(elapsedSeconds);
+            Position += new Vector2(controls.HorizontalSpeed * 6f, 0) * elapsedSeconds;
+            if (controls.IsAttemptingToJump) Velocity = new Vector2(Velocity.X, 16);
         }
     }
 }

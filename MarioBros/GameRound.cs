@@ -31,7 +31,10 @@ namespace MarioBros
             if(collision.A is PlayerCharacter p && collision.B is Block b)
             {
                 if (p.PhysicsBox.Bottom <= b.PhysicsBox.Top && p.PreviousPhysicsBox.Bottom > b.PhysicsBox.Top)
+                {
                     p.Position = new Vector2(p.Position.X, b.PhysicsBox.Top + 0.01f);
+                    p.Velocity = new Vector2(p.Velocity.X, 0);
+                }
             }
         }
 

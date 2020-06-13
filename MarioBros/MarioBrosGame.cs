@@ -33,7 +33,7 @@ namespace MarioBros
         {
             GameRound gameRound = new GameRound();
 
-            gameRound.Add(new PlayerCharacter() { Position = new Vector2(1, 10) });
+            gameRound.Add(new PlayerCharacter(KeyboardControls.Player1) { Position = new Vector2(1, 10) });
 
             gameRound.Add(new Block(0.5f, 0.5f));
             gameRound.Add(new Block(1.5f, 0.5f));
