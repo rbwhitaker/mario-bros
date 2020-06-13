@@ -13,15 +13,19 @@ namespace MarioBros
     {
         ContentManager content;
         SpriteBatch spriteBatch;
-        private Texture2D simpleRectangle, Mario_Idle, Creeper, Block;
+        SpriteFont font;
+        private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block;
 
         public BasicRenderer(ContentManager Content)
         {
             content = Content;
             simpleRectangle = Content.Load<Texture2D>("Rectangle16");
-            Mario_Idle = Content.Load<Texture2D>("M1");
+            Mario_Left = Content.Load<Texture2D>("M1L");
+            Mario_Right = Content.Load<Texture2D>("M1R");
             Creeper = Content.Load<Texture2D>("Creeper");
             Block = Content.Load<Texture2D>("Block");
+
+            font = Content.Load<SpriteFont>("Font");
         }
 
         public void Render(GameRound gameRound, SpriteBatch SpriteBatch)
@@ -43,7 +47,10 @@ namespace MarioBros
             Box visualBox = c.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(Mario_Idle, bounds, Color.White);
+            
+            if (c.Direction) { spriteBatch.Draw(Mario_Right, bounds, Color.White); }
+            if (!c.Direction) { spriteBatch.Draw(Mario_Left, bounds, Color.White); }            
+            spriteBatch.DrawString(font, c.Velocity.ToString(), new Vector2(100, 100), Color.White);
         }
 
         private void DrawShellCreeper(Shellcreeper shellcreeper)
