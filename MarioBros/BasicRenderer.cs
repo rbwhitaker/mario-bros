@@ -17,6 +17,8 @@ namespace MarioBros
         private Texture2D simpleRectangle, Mario_Left, Mario_Right, Creeper, Block, TurtleBack;
         private Texture2D StraightPipe, CurvedPipe, Stepper;
 
+        private const float PixelsPerUnit = 16;
+
         public BasicRenderer(ContentManager Content)
         {
             content = Content;
@@ -43,7 +45,7 @@ namespace MarioBros
                 if (gameObject is BlockBump bump) DrawBlockBump(bump);
                 if (gameObject is PlayerCharacter c) DrawPlayerCharacter(c);
                 if (gameObject is Shellcreeper s) DrawShellCreeper(s);
-                else if (gameObject is Monster m) DrawGenericMonster(m);
+                //else if (gameObject is Monster m) DrawGenericMonster(m);
                 if (gameObject is ExitPipe p) DrawExitPipe(p);
                 if (gameObject is Sidestepper stepper) DrawSideStepper(stepper);
             }
@@ -54,7 +56,6 @@ namespace MarioBros
             Box visualBox = stepper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-
             spriteBatch.Draw(Stepper, bounds, Color.White);
         }
 
@@ -84,8 +85,6 @@ namespace MarioBros
             bounds.Y -= 16;
             spriteBatch.Draw(Creeper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), shellcreeper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
         }
-
-        private const float PixelsPerUnit = 16;
 
         private void DrawBlock(Block b)
         {
