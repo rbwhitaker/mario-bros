@@ -6,6 +6,7 @@ namespace MarioBros
     public abstract class SimpleObject : GameObject
     {
         public Vector2 Velocity { get; set; }
+        public bool Direction = true;
 
         public SimpleObject(Dimensions visualDimensions, Dimensions physicsDimensions) : base(visualDimensions, physicsDimensions) { }
 
@@ -25,9 +26,9 @@ namespace MarioBros
         private static readonly Dimensions CharacterVisualDimensions = new Dimensions(1, 1, 2, 0);
         private static readonly Dimensions JumpArea = new Dimensions(1, 1, -0.01f, 0.25f);
 
-
         private readonly IPlayerControls controls;
         public int Lives { get; private set; }
+
         public void Kill()
         {
             Lives--;
@@ -46,8 +47,10 @@ namespace MarioBros
 
             controls.Update(elapsedSeconds);
             Position += new Vector2(controls.HorizontalSpeed * 20f, 0) * elapsedSeconds;
+            if (controls.HorizontalSpeed > 0) Direction = true;
+            if (controls.HorizontalSpeed < 0) Direction = false;
             if (controls.IsAttemptingToJump)
-                if(round.ObjectsIn(new Box(Position, JumpArea)).Any())
+                if (round.ObjectsIn(new Box(Position, JumpArea)).Any())
                     Velocity = new Vector2(Velocity.X, 30);
         }
     }
