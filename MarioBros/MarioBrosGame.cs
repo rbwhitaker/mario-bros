@@ -8,6 +8,7 @@ namespace MarioBros
     {
         private readonly GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        private GameRound gameRound;
         
         public MarioBrosGame()
         {
