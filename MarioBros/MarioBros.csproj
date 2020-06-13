@@ -50,6 +50,8 @@
     <Compile Include="Dimensions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRound.cs" />
+    <Compile Include="IPlayerControls.cs" />
+    <Compile Include="KeyboardControls.cs" />
     <Compile Include="MarioBrosGame.cs" />
     <Compile Include="PlayerCharacter.cs" />
     <Compile Include="Program.cs" />
