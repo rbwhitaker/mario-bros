@@ -63,7 +63,7 @@ namespace MarioBros
             Box visualBox = shellcreeper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(Creeper, bounds, Color.White);
+            spriteBatch.Draw(Creeper, bounds, null, Color.White, 0, new Vector2(0.5f, 0.5f), shellcreeper.IsStunned ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
         }
 
         private const float PixelsPerUnit = 16;
@@ -77,7 +77,7 @@ namespace MarioBros
 
         private void DrawExitPipe(ExitPipe pipe)
         {
-            Box visualBox = pipe.PhysicsBox;
+            Box visualBox = pipe.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             if (bounds.X == 0) { spriteBatch.Draw(StraightPipe, bounds, null, Color.LightGreen, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0.0f); } else { spriteBatch.Draw(StraightPipe, bounds, Color.LightGreen); }
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 
 namespace MarioBros
 {
@@ -11,7 +12,9 @@ namespace MarioBros
 
         private static readonly Dimensions ShellcreeperPhysicsDimensions = new Dimensions(0.8f, 0.8f, 1.8f, 0);
         private static readonly Dimensions ShellcreeperVisualDimensions = new Dimensions(1, 1, 2, 0);
+        private static readonly Dimensions GroundArea = new Dimensions(1, 1, -0.01f, 0.25f);
         public Direction Direction { get; set; }
+        public bool IsStunned { get; set; }
 
         public Shellcreeper() : base(ShellcreeperVisualDimensions, ShellcreeperPhysicsDimensions) { }
 
@@ -19,7 +22,8 @@ namespace MarioBros
         {
             base.UpdateCore(round, elapsedSeconds);
 
-            Position += new Vector2((Direction == Direction.Left ? -1 : +1) * ShellcreeperSpeed * elapsedSeconds, 0);
+            if(!IsStunned || !round.ObjectsIn(new Box(Position, GroundArea)).OfType<Block>().Any())
+                Position += new Vector2((Direction == Direction.Left ? -1 : +1) * ShellcreeperSpeed * elapsedSeconds, 0);
         }
     }
 }
