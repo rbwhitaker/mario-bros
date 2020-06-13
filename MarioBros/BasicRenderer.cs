@@ -38,6 +38,7 @@ namespace MarioBros
         {
             Box visualBox = c.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
+            bounds.Y -= 16;
             spriteBatch.Draw(simpleRectangle, bounds, Color.White);
         }
 
@@ -45,9 +46,9 @@ namespace MarioBros
         {
             Box visualBox = shellcreeper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
+            bounds.Y -= 16;
             spriteBatch.Draw(simpleRectangle, bounds, Color.Green);
         }
-
 
         private const float PixelsPerUnit = 16;
 
@@ -60,7 +61,7 @@ namespace MarioBros
 
         private Rectangle ToPixels(Box box)
         {            
-            return new Rectangle((int)(box.Left * PixelsPerUnit), (((int)(box.Bottom * PixelsPerUnit))*-1)+400, (int)(box.Width * PixelsPerUnit), (int)(box.Height * PixelsPerUnit));
+            return new Rectangle((int)(box.Left * PixelsPerUnit), (((int)(box.Bottom * PixelsPerUnit))*-1)+384, (int)(box.Width * PixelsPerUnit), (int)(box.Height * PixelsPerUnit));
         }
     }
 }
