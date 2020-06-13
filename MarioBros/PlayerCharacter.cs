@@ -39,6 +39,7 @@ namespace MarioBros
         public PlayerCharacter(IPlayerControls controls) : base(CharacterVisualDimensions, CharacterPhysicsDimensions)
         {
             this.controls = controls;
+            Lives = 5;
         }
 
         public override void UpdateCore(GameRound round, float elapsedSeconds)
