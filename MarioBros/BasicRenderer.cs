@@ -13,12 +13,15 @@ namespace MarioBros
     {
         ContentManager content;
         SpriteBatch spriteBatch;
-        private Texture2D simpleRectangle;
+        private Texture2D simpleRectangle, Mario_Idle, Creeper, Block;
 
         public BasicRenderer(ContentManager Content)
         {
             content = Content;
             simpleRectangle = Content.Load<Texture2D>("Rectangle16");
+            Mario_Idle = Content.Load<Texture2D>("M1");
+            Creeper = Content.Load<Texture2D>("Creeper");
+            Block = Content.Load<Texture2D>("Block");
         }
 
         public void Render(GameRound gameRound, SpriteBatch SpriteBatch)
@@ -40,7 +43,7 @@ namespace MarioBros
             Box visualBox = c.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(simpleRectangle, bounds, Color.White);
+            spriteBatch.Draw(Mario_Idle, bounds, Color.White);
         }
 
         private void DrawShellCreeper(Shellcreeper shellcreeper)
@@ -48,7 +51,7 @@ namespace MarioBros
             Box visualBox = shellcreeper.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
             bounds.Y -= 16;
-            spriteBatch.Draw(simpleRectangle, bounds, Color.Green);
+            spriteBatch.Draw(Creeper, bounds, Color.White);
         }
 
         private const float PixelsPerUnit = 16;
@@ -57,7 +60,7 @@ namespace MarioBros
         {
             Box visualBox = b.VisualBox;
             Rectangle bounds = ToPixels(visualBox);
-            spriteBatch.Draw(simpleRectangle, bounds, Color.Blue);
+            spriteBatch.Draw(Block, bounds, Color.White);
         }
 
         private void DrawBlockBump(BlockBump b)

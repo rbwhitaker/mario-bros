@@ -1,0 +1,16 @@
+﻿
+TILES
+1:
+{
+tile = Block(x, y)
+}
+2:
+{
+
+tile = PlayerCharacter(KeyboardControls.Player1)
+tile.Position = Vector2(x, y)
+
+}
+
+LEVEL
+1111112111
